@@ -81,3 +81,66 @@ replication remains pending.
 The machine-readable outputs are retained in
 `ordered_attribution_out/results.json` and
 `ordered_attribution_out/values.csv`.
+
+## Curriculum experiment: October 20, 2026
+
+Executed on an NVIDIA RTX 5060 with
+`python curriculum_experiment.py --seeds 1 --perms 110`.
+
+Seed 0 used 54 chunks: 18 core, 12 duplicate, 12 irrelevant,
+and 12 harmful.
+
+### Training order and selection
+
+| Method | Test loss | Difference from random |
+| --- | ---: | ---: |
+| Random | 1.9773 | 0.0000 |
+| Scalar descending | 3.2279 | +1.2506 |
+| Scalar ascending | 2.1691 | +0.1918 |
+| Early descending | 3.0766 | +1.0993 |
+| Category oracle | 3.0973 | +1.1200 |
+| Core only | 1.4840 | -0.4933 |
+| Greedy | 3.2733 | +1.2960 |
+| Greedy with stopping | 1.1858 | -0.7915 |
+
+Lower loss is better. Greedy stopping retained 17 chunks:
+13 core and four duplicates, with no irrelevant or harmful chunks.
+Its loss was approximately 40% lower than random ordering.
+
+Sorting all chunks by average attribution did not produce a successful
+curriculum in this run. Conditional selection with stopping performed
+better, distinguishing subset selection from full-corpus ordering.
+
+### Position-dependent marginal contributions
+
+Mean loss reduction by training-position bin:
+
+| Category | Bin 1 | Bin 2 | Bin 3 | Bin 4 | Bin 5 | Bin 6 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Core | +0.10284 | +0.09771 | +0.09062 | +0.08265 | +0.08711 | +0.07827 |
+| Duplicate | +0.09403 | +0.09721 | +0.09460 | +0.07828 | +0.07379 | +0.06510 |
+| Irrelevant | -0.12892 | -0.04172 | -0.02730 | -0.03552 | -0.03356 | -0.03009 |
+| Harmful | -0.15205 | -0.12207 | -0.11025 | -0.12353 | -0.12489 | -0.13420 |
+
+### Arrival analysis
+
+| Pair type | Pairs | First | Second | Gap | Second / first |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Duplicate | 12 | +0.09271 | +0.07426 | +0.01845 | 0.801 |
+| Same-family core | 18 | +0.09707 | +0.08146 | +0.01560 | 0.839 |
+| Cross-family core | 135 | +0.09326 | +0.08527 | +0.00798 | 0.914 |
+
+Second arrivals retained less marginal value, particularly for duplicate
+pairs. Pairs share chunks and trajectories and are not independent
+experimental replications.
+
+### Limitations
+
+These are exploratory results from one seed. Across-seed standard
+deviations are undefined. Full-corpus and subset methods use different
+training amounts; follow-up experiments should compare random and
+useful-only 17-chunk subsets with matched optimization budgets.
+Validation/test separation for selection and stopping remains to
+be verified.
+
+Per-seed results and summary.json are saved in curriculum_out/.

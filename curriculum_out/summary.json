@@ -1,0 +1,113 @@
+{
+  "args": {
+    "seeds": 1,
+    "seed0": 0,
+    "perms": 110,
+    "bins": 6,
+    "random_draws": 5,
+    "stop_eps": 0.0,
+    "skip_greedy": false,
+    "out": "curriculum_out",
+    "vocab": 16,
+    "seqlen": 9,
+    "seqs_per_chunk": 8,
+    "eval_fams": 6,
+    "distract_fams": 3,
+    "warm_fams": 3,
+    "core_per_fam": 3,
+    "dups": 12,
+    "irrel": 12,
+    "harm": 12,
+    "eval_per_fam": 64,
+    "dim": 64,
+    "layers": 2,
+    "heads": 4,
+    "lr": 0.001,
+    "steps": 10,
+    "corrupt_frac": 1.0,
+    "warm_steps": 300
+  },
+  "seeds": [
+    0
+  ],
+  "aggregate": {
+    "orderings": {
+      "random": {
+        "mean": 1.9773209810256958,
+        "sd": NaN,
+        "vs_random": 0.0,
+        "seeds_below_random": 0,
+        "n_seeds": 1
+      },
+      "scalar_desc": {
+        "mean": 3.227886438369751,
+        "sd": NaN,
+        "vs_random": 1.2505654573440552,
+        "seeds_below_random": 0,
+        "n_seeds": 1
+      },
+      "scalar_asc": {
+        "mean": 2.1691250801086426,
+        "sd": NaN,
+        "vs_random": 0.19180409908294682,
+        "seeds_below_random": 0,
+        "n_seeds": 1
+      },
+      "early_desc": {
+        "mean": 3.0766470432281494,
+        "sd": NaN,
+        "vs_random": 1.0993260622024537,
+        "seeds_below_random": 0,
+        "n_seeds": 1
+      },
+      "category_oracle": {
+        "mean": 3.0973191261291504,
+        "sd": NaN,
+        "vs_random": 1.1199981451034546,
+        "seeds_below_random": 0,
+        "n_seeds": 1
+      },
+      "core_only": {
+        "mean": 1.4840127944946289,
+        "sd": NaN,
+        "vs_random": -0.4933081865310669,
+        "seeds_below_random": 1,
+        "n_seeds": 1
+      },
+      "greedy": {
+        "mean": 3.273296594619751,
+        "sd": NaN,
+        "vs_random": 1.2959756135940552,
+        "seeds_below_random": 0,
+        "n_seeds": 1
+      },
+      "greedy_stop": {
+        "mean": 1.1858131885528564,
+        "sd": NaN,
+        "vs_random": -0.7915077924728393,
+        "seeds_below_random": 1,
+        "n_seeds": 1
+      }
+    },
+    "arrival": {
+      "duplicate": {
+        "first": 0.09270879192785782,
+        "second": 0.07426285192821964,
+        "gap": 0.018445939999638172,
+        "retained": 0.8010335415222318
+      },
+      "same_family_core": {
+        "first": 0.09706728964140922,
+        "second": 0.08146400849024454,
+        "gap": 0.015603281151164675,
+        "retained": 0.8392529428934599
+      },
+      "cross_family_core": {
+        "first": 0.09325772600141838,
+        "second": 0.08527357213023534,
+        "gap": 0.007984153871183036,
+        "retained": 0.9143861402854536
+      }
+    }
+  }
+}
