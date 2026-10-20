@@ -144,3 +144,49 @@ Validation/test separation for selection and stopping remains to
 be verified.
 
 Per-seed results and summary.json are saved in curriculum_out/.
+
+## Five-seed curriculum experiment
+
+Completed October 20, 2026, using an NVIDIA RTX 5060.
+Command: `python curriculum_experiment.py --seeds 5`.
+Each seed used 220 permutations and 54 training chunks.
+
+| Method | Mean test loss | Standard deviation | Seeds beating random |
+| --- | ---: | ---: | ---: |
+| Random | 2.0175 | 0.0908 | — |
+| Scalar descending | 3.0259 | 0.1970 | 0/5 |
+| Scalar ascending | 1.6996 | 0.3808 | 4/5 |
+| Early descending | 3.2231 | 0.2446 | 0/5 |
+| Category oracle | 2.9265 | 0.1597 | 0/5 |
+| Core only | 1.4399 | 0.0986 | 5/5 |
+| Greedy, full corpus | 3.1308 | 0.1411 | 0/5 |
+| Greedy with stopping | 1.1371 | 0.0879 | 5/5 |
+
+Greedy stopping achieved the lowest reported test loss in every seed.
+It retained 13–19 chunks, exclusively core examples and duplicates.
+Its mean loss was 43.6% below random and 21.0% below core-only training.
+
+Descending scalar ordering and full-corpus greedy ordering consistently
+performed worse than random. These results distinguish useful subset
+selection with stopping from ordering the entire training corpus.
+
+### Arrival analysis across seeds
+
+| Pair type | First-arrival gain | Second-arrival gain | Gap | Retained |
+| --- | ---: | ---: | ---: | ---: |
+| Duplicate | 0.10019 | 0.08075 | 0.01944 | 0.806 |
+| Same-family core | 0.10308 | 0.08379 | 0.01929 | 0.814 |
+| Cross-family core | 0.09848 | 0.08839 | 0.01010 | 0.898 |
+
+Duplicate and same-family pairs showed similar attenuation.
+Arrival-position effects remain a possible contributor, and pairs
+sharing chunks and trajectories are not independent replications.
+
+These findings cover seeds 0–4 within one synthetic setup.
+Seed 0 repeats the earlier pilot with more permutation samples.
+Validation/test separation for adaptive selection and stopping remains
+to be verified. Comparisons with equally sized useful-only and random
+subsets under matched training budgets remain outstanding.
+
+Timestamped copies of the outputs are retained under results/.
+

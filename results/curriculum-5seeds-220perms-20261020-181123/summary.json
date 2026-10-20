@@ -1,0 +1,117 @@
+{
+  "args": {
+    "seeds": 5,
+    "seed0": 0,
+    "perms": 220,
+    "bins": 6,
+    "random_draws": 5,
+    "stop_eps": 0.0,
+    "skip_greedy": false,
+    "out": "curriculum_out",
+    "vocab": 16,
+    "seqlen": 9,
+    "seqs_per_chunk": 8,
+    "eval_fams": 6,
+    "distract_fams": 3,
+    "warm_fams": 3,
+    "core_per_fam": 3,
+    "dups": 12,
+    "irrel": 12,
+    "harm": 12,
+    "eval_per_fam": 64,
+    "dim": 64,
+    "layers": 2,
+    "heads": 4,
+    "lr": 0.001,
+    "steps": 10,
+    "corrupt_frac": 1.0,
+    "warm_steps": 300
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "aggregate": {
+    "orderings": {
+      "random": {
+        "mean": 2.0175054359436033,
+        "sd": 0.0907535151954617,
+        "vs_random": 0.0,
+        "seeds_below_random": 0,
+        "n_seeds": 5
+      },
+      "scalar_desc": {
+        "mean": 3.0258990287780763,
+        "sd": 0.19697438862762534,
+        "vs_random": 1.0083935928344725,
+        "seeds_below_random": 0,
+        "n_seeds": 5
+      },
+      "scalar_asc": {
+        "mean": 1.699592685699463,
+        "sd": 0.38078675726245204,
+        "vs_random": -0.3179127502441407,
+        "seeds_below_random": 4,
+        "n_seeds": 5
+      },
+      "early_desc": {
+        "mean": 3.223080205917358,
+        "sd": 0.2446005269073735,
+        "vs_random": 1.205574769973755,
+        "seeds_below_random": 0,
+        "n_seeds": 5
+      },
+      "category_oracle": {
+        "mean": 2.926536464691162,
+        "sd": 0.15970928645197122,
+        "vs_random": 0.9090310287475585,
+        "seeds_below_random": 0,
+        "n_seeds": 5
+      },
+      "core_only": {
+        "mean": 1.4399237585067748,
+        "sd": 0.09856400857022317,
+        "vs_random": -0.5775816774368286,
+        "seeds_below_random": 5,
+        "n_seeds": 5
+      },
+      "greedy": {
+        "mean": 3.1308071613311768,
+        "sd": 0.14105366939117459,
+        "vs_random": 1.1133017253875732,
+        "seeds_below_random": 0,
+        "n_seeds": 5
+      },
+      "greedy_stop": {
+        "mean": 1.1371281385421752,
+        "sd": 0.08793350976523372,
+        "vs_random": -0.8803772974014283,
+        "seeds_below_random": 5,
+        "n_seeds": 5
+      }
+    },
+    "arrival": {
+      "duplicate": {
+        "first": 0.10019272744655609,
+        "second": 0.08075082181981116,
+        "gap": 0.019441905626744926,
+        "retained": 0.8064800375984464
+      },
+      "same_family_core": {
+        "first": 0.10307737466060754,
+        "second": 0.08378973788685269,
+        "gap": 0.019287636773754856,
+        "retained": 0.8136366699900475
+      },
+      "cross_family_core": {
+        "first": 0.0984816625407248,
+        "second": 0.08838545000673544,
+        "gap": 0.010096212533989337,
+        "retained": 0.8977129978458558
+      }
+    }
+  }
+}
